@@ -10,9 +10,9 @@ console.log(sumOfPoints);
 function getPoints(line: string): number {
   var numbers = getNumbers(line);
 
-  const drawnWinnungNumbers = numbers.drawnNumbers.filter((drawnNumber) =>numbers.winningNumbers.includes(drawnNumber)).length;
-  if (drawnWinnungNumbers > 0) {
-    return Math.pow(2, drawnWinnungNumbers - 1);
+  const numberOfDrawnWinnungNumbers = numbers.drawnNumbers.filter((drawnNumber) =>numbers.winningNumbers.includes(drawnNumber)).length;
+  if (numberOfDrawnWinnungNumbers > 0) {
+    return Math.pow(2, numberOfDrawnWinnungNumbers - 1);
   } else {
     return 0;
   }
