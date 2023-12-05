@@ -4,7 +4,8 @@ using Puzzle_1;
 
 var lines = File.ReadAllLines("input.txt").ToList();
 
-var seedIds = lines.PopFirst().Split(" ").Skip(1).Select(long.Parse).ToList();
+var seedIds = lines.PopFirst().Split(" ").Skip(1).Select(Int128.Parse).Chunk(2).Select(chunk => (Start: chunk[0], End: chunk[0] + chunk[1]));
+var maximumSeedId = seedIds.Max(seedId => seedId.End);
 
 lines.RemoveWhile(string.IsNullOrWhiteSpace);
 
@@ -18,14 +19,23 @@ while (lines.Any())
     lines.RemoveWhile(string.IsNullOrWhiteSpace);
 }
 
-var sourceCriteria = "seed";
-var currentIds = seedIds.AsEnumerable();
-
-while (sourceCriteria != "location")
+Int128 smallestLocation = Int128.MaxValue;
+for (Int128 seed = 0; seed <= maximumSeedId; seed++)
 {
-    var criteriaMap = criteriaMaps.Single(map => map.SourceCriteria == sourceCriteria);
-    currentIds = currentIds.Select(sourceId => criteriaMap.GetDestinationId(sourceId));
-    sourceCriteria = criteriaMap.DestinationCriteria;
+    var sourceCriteria = "seed";
+    var sourceId = seed;
+    
+    while (sourceCriteria != "location")
+    {
+        var criteriaMap = criteriaMaps.Single(map => map.SourceCriteria == sourceCriteria);
+        sourceId = criteriaMap.GetDestinationId(sourceId);
+        sourceCriteria = criteriaMap.DestinationCriteria;
+    }
+
+    if (smallestLocation > sourceId)
+    {
+        smallestLocation = sourceId;
+    }
 }
 
-Console.WriteLine(currentIds.Min());
+Console.WriteLine(smallestLocation);

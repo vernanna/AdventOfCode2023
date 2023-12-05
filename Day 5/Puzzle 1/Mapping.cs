@@ -1,8 +1,8 @@
 ﻿namespace Puzzle_1;
 
-public record Mapping(long SourceStart, long SourceEnd, long DestinationStart)
+public record Mapping(Int128 SourceStart, Int128 SourceEnd, Int128 DestinationStart)
 {
-    public bool IsFor(long sourceId) => SourceStart <= sourceId && sourceId <= SourceEnd;
+    public bool IsFor(Int128 sourceId) => SourceStart <= sourceId && sourceId <= SourceEnd;
 
-    public long DestinationFor(long sourceId) => DestinationStart + sourceId - SourceStart;
+    public Int128 DestinationFor(Int128 sourceId) => DestinationStart + sourceId - SourceStart;
 }

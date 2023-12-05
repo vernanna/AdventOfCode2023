@@ -9,7 +9,14 @@ public class CriteriaMap
     public IReadOnlyCollection<Mapping> Mappings { get; }
 
     public Int128 GetDestinationId(Int128 sourceId) =>
-        Mappings.SingleOrDefault(mapping => mapping.IsFor(sourceId))?.DestinationFor(sourceId) ?? sourceId;
+        Mappings.SingleOrDefault(mapping => mapping.IsForSourceId(sourceId))?.DestinationFor(sourceId) ?? sourceId;
+    
+    public List<Int128> GetSourceIds(Int128 destinationId)
+    {
+        var sources = Mappings.Where(mapping => mapping.IsForDestinationId(destinationId)).Select(mapping => mapping.SourceFor(destinationId)).ToList();
+
+        return sources.Any() ? sources : new List<Int128> { destinationId };
+    }
 
     public static CriteriaMap Create(List<string> lines)
     {
@@ -27,7 +34,7 @@ public class CriteriaMap
                     var sourceRangeStart = numbers.PopFirst();
                     var rangeLength = numbers.PopFirst();
 
-                    return new Mapping(sourceRangeStart, sourceRangeStart + rangeLength, destinationRangeStart);
+                    return new Mapping(sourceRangeStart, sourceRangeStart + rangeLength, destinationRangeStart, destinationRangeStart + rangeLength);
                 })
             .ToList();
 
