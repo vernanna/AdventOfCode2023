@@ -13,7 +13,7 @@ end
 
 $lines = File.readlines("input.txt", chomp: true)
 $instructions = $lines.shift.split("")
-$node_lines = $lines[2..]
+$node_lines = $lines[1..]
 
 $nodes = $node_lines.map{ |line|
   parts = line.scan(/[A-Z][A-Z][A-Z]/)
