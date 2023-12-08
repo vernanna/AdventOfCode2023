@@ -32,17 +32,12 @@ class Hand
     else
       @type = HAND_TYPE[:high_card]
     end
-end
-
-attr_reader :type
-attr_reader :cards
-attr_reader :bid
-
-def display_details()
-    puts "Customer id #@cust_id"
-    puts "Customer name #@cust_name"
-    puts "Customer address #@cust_addr"
   end
+
+  attr_reader :type
+  attr_reader :cards
+  attr_reader :bid
+
 end
 
 $lines = File.readlines('input.txt', chomp: true)

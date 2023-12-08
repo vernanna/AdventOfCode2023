@@ -71,17 +71,12 @@ class Hand
         @type = HAND_TYPE[:five_of_a_kind]
       end
     end
-end
-
-attr_reader :type
-attr_reader :cards
-attr_reader :bid
-
-def display_details()
-    puts "Customer id #@cust_id"
-    puts "Customer name #@cust_name"
-    puts "Customer address #@cust_addr"
   end
+
+  attr_reader :type
+  attr_reader :cards
+  attr_reader :bid
+
 end
 
 $lines = File.readlines('input.txt', chomp: true)
