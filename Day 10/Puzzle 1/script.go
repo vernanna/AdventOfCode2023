@@ -75,7 +75,7 @@ func main() {
 		currentTile = nextTile
 
 		numberOfSteps++
-		if currentTile.symbol == startTile.symbol {
+		if currentTile == startTile {
 			break
 		}
 	}
@@ -102,9 +102,6 @@ func connectsTo(firstTile Tile, secondTile Tile) bool {
 		(secondTile.symbol == "S" || secondTile.symbol == "|" || secondTile.symbol == "7" || secondTile.symbol == "F")) {
 		return true
 	}
-
-	// fmt.Println(fmt.Sprintf("%d-%d-%s", firstTile.row, firstTile.column, firstTile.symbol))
-	// fmt.Println(fmt.Sprintf("%d-%d-%s", secondTile.row, secondTile.column, secondTile.symbol))
 
 	return false
 }
