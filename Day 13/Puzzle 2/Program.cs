@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using MoreLinq;
+﻿using MoreLinq;
 
 var lines = File.ReadAllLines("input.txt").ToList();
 
@@ -20,7 +19,7 @@ var result = lines
                 var isMirrorRow = rowsAbove
                     .Reverse()
                     .Zip(rowsBelow)
-                    .All(rowAboveAndRowBelow => rowAboveAndRowBelow.First == rowAboveAndRowBelow.Second);
+                    .Sum(rowAboveAndRowBelow => rowAboveAndRowBelow.First.Zip(rowAboveAndRowBelow.Second, (characterAbove, characterBelow) => characterAbove == characterBelow ? 0 : 1).Sum()) == 1;
                 if (isMirrorRow)
                 {
                     return (index + 1) * 100;
@@ -40,7 +39,7 @@ var result = lines
                 var isMirrorColumn = columnsLeft
                     .Reverse()
                     .Zip(columnsRight)
-                    .All(columnLeftAndColumnRight => columnLeftAndColumnRight.First == columnLeftAndColumnRight.Second);
+                    .Sum(columnLeftAndColumnRight => columnLeftAndColumnRight.First.Zip(columnLeftAndColumnRight.Second, (characterLeft, characterRight) => characterLeft == characterRight ? 0 : 1).Sum()) == 1;
                 if (isMirrorColumn)
                 {
                     return index + 1;
