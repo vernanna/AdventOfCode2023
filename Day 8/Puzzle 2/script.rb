@@ -40,22 +40,4 @@ end
 
 $smallest_number_of_steps = $numbers_of_steps.reduce(1, :lcm)
 
-
-
-
-
-
-
-
-#$number_of_steps = 0
-
-#while $current_nodes.any? {|node| !node.id.end_with?("Z")}
-#  $instruction_index = $number_of_steps % $instructions.length
-#  $instruction = $instructions[$instruction_index]
-#  $next_node_ids = Set.new($instruction == "L" ? $current_nodes.map(&:left) : $current_nodes.map(&:right))
-#  $current_nodes = $nodes.select { |node| $next_node_ids.include?(node.id) }
-#  $number_of_steps += 1
-#  puts $number_of_steps
-#end
-
 puts $smallest_number_of_steps
